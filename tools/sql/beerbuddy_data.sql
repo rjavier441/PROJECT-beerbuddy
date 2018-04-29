@@ -5,10 +5,10 @@ SET SQL_SAFE_UPDATES = 0;
 DELETE FROM in_house WHERE bar_id IS NOT NULL;
 DELETE FROM common_brand WHERE bar_id IS NOT NULL;
 DELETE FROM ingredients WHERE bar_id IS NOT NULL;
+DELETE FROM serves WHERE bar_id IS NOT NULL;
 DELETE FROM drink WHERE bar_id IS NOT NULL;
 DELETE FROM rate_bar WHERE bar_id IS NOT NULL;
 DELETE FROM rate_drink WHERE bar_id IS NOT NULL;
-DELETE FROM serves WHERE bar_id IS NOT NULL;
 DELETE FROM bar_location WHERE bar_id IS NOT NULL;
 DELETE FROM bar WHERE username IS NOT NULL;
 DELETE FROM bar_owner WHERE username IS NOT NULL;
@@ -183,8 +183,8 @@ VALUES
 INSERT INTO rate_bar (bar_id, username,stars)
 VALUES
 (0, "huy", 5),	-- Huy's Hops Ratings
-(0, "rjavier441", 4)
-(0, "cindywang", 0)
+(0, "rjavier441", 4),
+(0, "cindywang", 0),
 (0, "vsingh95", 3),
 (0, "chewchewtrain", 3),
 (1, "huy", 0),	-- Five Points Ratings
