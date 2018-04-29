@@ -6,6 +6,7 @@ use beerbuddy;
 CREATE TABLE user(
 	username varchar(30) NOT NULL,
     birthdate datetime,
+    password varchar(100) NOT NULL,
     PRIMARY KEY (username),
     unique (username)
 );
@@ -45,8 +46,7 @@ CREATE TABLE drink
 	calories int(10),
 	price int(10),
 	bar_id INT(5) NOT NULL,
-    primary key (bar_id),
-    unique (name),
+    primary key (bar_id, name),
     foreign key (bar_id) references bar(bar_id)
 );
 
@@ -55,9 +55,8 @@ CREATE TABLE ingredients (
 	name VARCHAR(50) NOT NULL, 
 	bar_id INT(5) NOT NULL,
 	ing_name VARCHAR(30) NOT NULL,
-    unique (name),
-    foreign key (bar_id) references drink(bar_id),
-    foreign key (name) references drink(name)
+    primary key (bar_id, name, ing_name),
+    foreign key (bar_id, name) references drink(bar_id, name)
     );
 
 -- ALTER TABLE ingredients ADD CONSTRAINT FK_ingredients_name 
@@ -72,9 +71,9 @@ CREATE TABLE serves
 	username VARCHAR(20) NOT NULL, 
 	bar_id INT(5) NOT NULL,
 	name VARCHAR(30) NOT NULL,
-    primary key (username, bar_id),
+    primary key (username, bar_id, name),
     foreign key (username) references bar(username),
-    foreign key (bar_id) references bar(bar_id)
+    foreign key (bar_id, name) references drink(bar_id, name)
 );
 
 -- ALTER TABLE serves ADD CONSTRAINT FK_serves_username FOREIGN 
@@ -85,23 +84,19 @@ CREATE TABLE serves
     
 CREATE TABLE in_house(
 	name varchar(50) NOT NULL,
-	in_house_taste varchar(50),
+	in_house_taste varchar(200),
 	bar_id INT(5) NOT NULL,
-	primary key (bar_id),
-    unique key (name),
-    FOREIGN KEY (bar_id) REFERENCES serves(bar_id),
-    foreign key (name) references drink(name)
+	primary key (bar_id, name),
+    FOREIGN KEY (bar_id, name) REFERENCES drink(bar_id, name)
 );
 
 CREATE TABLE common_brand(
 	name varchar(50) NOT NULL REFERENCES drink(name),
-	manufacture varchar(50),
-	common_taste varchar(50),
+	manufacturer varchar(50),
+	common_taste varchar(200),
 	bar_id INT(5) NOT NULL,
-	PRIMARY KEY(bar_id),
-    unique (name),
-	FOREIGN KEY (bar_id) REFERENCES serves(bar_id),
-    foreign key (name) references drink(name)
+	PRIMARY KEY(bar_id, name),
+	FOREIGN KEY (bar_id, name) REFERENCES drink(bar_id, name)
 );
     
 CREATE TABLE rate_drink 
