@@ -7,8 +7,7 @@ CREATE TABLE user(
 	username varchar(30) NOT NULL,
     birthdate datetime,
     password varchar(100) NOT NULL,
-    PRIMARY KEY (username),
-    unique (username)
+    PRIMARY KEY (username)
 );
 
 create table bar_owner
@@ -22,8 +21,8 @@ create table bar_owner
 create table bar
 (
     username		varchar(30) NOT NULL, 
-	bar_name		varchar(20) NOT NULL, 
-	bar_id INT(5) NOT NULL,
+	bar_name		varchar(30) NOT NULL, 
+	bar_id INT(5) NOT NULL AUTO_INCREMENT,
 	primary key (bar_id,username),
 	foreign key (username) references bar_owner(username)
 );
