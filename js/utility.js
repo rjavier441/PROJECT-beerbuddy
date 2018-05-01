@@ -82,4 +82,22 @@ function post (uri, data, callback, ajaxMode) {
 	}
 }
 
+/*
+	@function 	supportsStorage
+    @parameter  type - a string name of the storage bin to check for
+    @returns    true, if the storage type is suppored
+                false, otherwise
+    @details    This function checks for support of new browser storage technology (i.e. an alternative to cookies). Valid inputs include "sessionStorage" or "localStorage"
+*/
+function supportsStorage (type) {
+    try {
+        var storage = window[type], x = "__storage_test__";
+        storage.setItem(x,x);
+        storage.removeItem(x);
+        return true;
+    } catch (err) {
+        console.log("An error occurred when checking '" + type + "'' compatibility");
+        return false;
+    }
+}
 // END utility.js
