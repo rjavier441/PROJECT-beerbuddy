@@ -11,15 +11,13 @@
     //                  MySQL
     //                  Apache Web Server
 
+    require "required/credentials.php";
     require "utility.php";
 
     // Acquire POST request body parameters
     $action = $_POST['action'];
     $data = $_POST['data'];
-    $credentials = [
-        "user" => "root",
-        "pwd" => "root"
-    ];
+    $credentials = $_CREDENTIALS["db"];
     $response = [
         "status" => "success",
         "message" => "OK"
@@ -47,7 +45,7 @@
         global $action, $response, $data, $credentials;  // force PHP to use the global variables
 
         // Instantiate a MySQL Connection
-        $mysqli = new mysqli("localhost", $credentials["user"], $credentials["pwd"], "beerbuddy");
+        $mysqli = new mysqli($credentials["host"], $credentials["user"], $credentials["pwd"], $credentials["name"]);
         if ($mysqli->connect_errno) {
             $response = formatResponse("failure", "MySQL connection failed: ($mysqli->connect_errno) $mysqli->connect_error");
         } else {
