@@ -1,0 +1,89 @@
+<!-- 
+	PROJECT: 		BeerBuddy
+	Name: 			Rolando Javier
+	File: 			index.html
+	Date Created: 	April 24, 2018
+	Last Modified: 	April 24, 2018
+	Details:
+		This file serves as the Beer Buddy Ratings Hub
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN header -->
+<head>
+	<!-- Metadata -->
+ 	<meta charset="UTF-8">
+ 	<meta name="description" content="A beer and bar rating application">
+ 	<meta name="author" content="M.Chew, R. Javier, T. Mai, V. Singh, C.Wang">
+ 	<meta name="keywords" content="beer,buddy,rating,application">
+ 	<meta name="last-modified" content="April 24, 2018">
+
+ 	<!-- Tab Title -->
+ 	<title>BeerBuddy</title>
+
+ 	<!-- Includes -->
+ 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<!-- BEGIN header -->
+
+<!-- BEGIN body -->
+<body>
+	<div class="container-fluid" style="margin: 10px;">
+		<div class="row">
+			<!-- BEGIN user pane -->
+			<div class="col-sm-4">
+				<h3>BeerBuddy</h3>
+				<h5>Username:<span id="username"></span></h5>
+				<h5><span id="error" style="color:red;"></span></h5>
+				<button id="logout" class="btn btn-danger" style="min-width: 100%;"><span class="glyphicon glyphicon-user"></span> Logout</button>
+				
+				<!-- BEGIN user input field -->
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button id="submitSearch" type="button" class="btn btn-success">Search</button>
+						<button type="button" class="btn btn-success" data-toggle="dropdown">by <span id="searchType"></span> <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#" onclick="setSearchType('bar')">Bar</a></li>
+							<li><a href="#" onclick="setSearchType('drink')">Drink</a></li>
+						</ul>
+					</div>
+					<input id="searchInput" type="text" class="form-control" placeholder="Search ratings here...">
+				</div>
+				<!-- END user input field -->
+			</div>
+			<!-- END user pane -->
+
+			<!-- BEGIN ratings feed -->
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div id="ratingFeed" class="panel panel-body">
+					</div>
+				</div>
+			</div>
+			<!-- END ratings feed -->
+
+			<!-- BEGIN results averages -->
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">Averages</div>
+					<div id="averageList" class="panel-body"></div>
+				</div>
+			</div>
+			<!-- END results averages -->
+		</div>
+	</div>
+</body>
+<!-- END body -->
+
+<!-- BEGIN footer -->
+<footer>
+	<script type="text/javascript" src="js/utility.js"></script>
+	<script type="text/javascript" src="js/ratingsPage.js"></script>
+</footer>
+<!-- END footer -->
+</html>
