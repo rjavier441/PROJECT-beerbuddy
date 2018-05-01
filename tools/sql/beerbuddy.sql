@@ -104,7 +104,7 @@ CREATE TABLE rate_drink
 	username varchar(25) not null,
     name varchar(25) not null,
     stars integer,
-    taste varchar(25),
+    taste varchar(200),
 	bar_id INT(5) NOT NULL,
     primary key (username, name, bar_id),
     foreign key (username) references user(username),
