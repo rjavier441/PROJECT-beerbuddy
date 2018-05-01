@@ -106,9 +106,7 @@ CREATE TABLE rate_drink
     stars integer,
     taste varchar(25),
 	bar_id INT(5) NOT NULL,
-    primary key (username),
-    unique (username),
-    unique (bar_id),
+    primary key (username, name, bar_id),
     foreign key (username) references user(username),
     foreign key (bar_id) references serves(bar_id)
 );

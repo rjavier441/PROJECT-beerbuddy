@@ -193,4 +193,19 @@ VALUES
 (1, "vsingh95", 2),
 (1, "chewchewtrain", 1);
 
+-- Mock Rate Drink Data
+INSERT INTO rate_drink (bar_id, name, username, stars, taste) VALUES
+(0, "Jaeger Bomb", "huy", 5, "The best drink ever!"),
+(0, "Jaeger Bomb", "chewchewtrain", 3, "Meh..."),
+(0, "Jaeger Bomb", "rjavier441", 0, "Not a fan."),
+(0, "El Diablo", "rjavier441", 3, "It's strong"),
+(0, "Jaeger Bomb", "vsingh95", 4, "I like it!"),
+(0, "El Diablo", "vsingh95", 3, "It's alright..."),
+(0, "Jaeger Bomb", "cindywang", 1, "Not as good as mine!"),
+(1, "Jaeger Nuke", "cindywang", 5, "Always great!"),
+(1, "Sea Sickness", "cindywang", 5, "Not really sickness!"),
+(1, "Tropical Sunrise", "huy", 0, "nah, man"),
+(1, "Tropical Sunrise", "rjavier441", 5, "Nice flavor!"),
+(1, "Water", "chewchewtrain", 5, "Good Ol' Water!");
+
 SET SQL_SAFE_UPDATES = 1;
