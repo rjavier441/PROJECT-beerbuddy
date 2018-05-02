@@ -1,11 +1,11 @@
 <!-- 
 	PROJECT: 		BeerBuddy
-	Name: 			Rolando Javier
+	Name: 			Truonghuy Mai
 	File: 			index.html
-	Date Created: 	April 24, 2018
-	Last Modified: 	April 24, 2018
+	Date Created: 	April 30, 2018
+	Last Modified: 	April 30, 2018
 	Details:
-		This file serves as the Beer Buddy Homepage
+		This file serves as the Beer Buddy Bar Owner Drink/Bar Creator/Editor
  -->
 
  <!DOCTYPE html>
@@ -33,64 +33,162 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
  </head>
  <!-- END header -->
+
  <!-- BEGIN body -->
  <body>
  	<div class="container-fluid">
  		<div class="row">
- 			<div class="well">
- 				<h1 class="bb-header">Beer Buddy</h1>
- 				<h3>Your buddy in beer!</h3>
+ 			<!-- BEGIN user pane -->
+ 			<div class="col-sm-4">
+ 				<h3>BeerBuddy</h3>
+ 				<h5>Username: <span id="username"></span></h5>
+ 				<h5><span id="error" style="color:red;"></span></h5>
+ 				<button id="logout" class="btn btn-danger" style="min-width: 100%;"><span class="glyphicon glyphicon-user"></span> Logout</button>
+ 			
+ 				<!-- BEGIN user rating mode -->
+ 				<div class="btn-group btn-group-justified">
+ 					<div class="btn-group">
+	 					<button type="button" class="btn btn-default">
+	 						Mode: <span id="modeName"></span>
+	 					</button>
+ 					</div>
+ 					<div class="btn-group">
+	 					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	 						<span class="caret"></span>
+	 						<span class="sr-only">Options</span>
+	 					</button>
+	 					<ul class="dropdown-menu">
+	 						<li><a href="#" onclick="changeMode('create')">Create Drink</a></li>
+	 						<li><a href="#" onclick="changeMode('edit')">Edit Drinks</a></li>
+	 						<li><a href="#" onclick="changeMode('delete')">Delete Drink</a></li>
+	 					</ul>
+ 					</div>
+ 				</div>
+ 				<!-- END user rating mode -->
+
+ 				<span>
+					Go to the ratings page <a href="http://localhost/beerbuddy/ratingsPage.html">here</a>!
+				</span>
  			</div>
+ 			<!-- END user pane -->
+
+ 			<!-- BEGIN editor area -->
+ 			<div class="col-sm-4">
+ 				<div class="well">
+	 				<div id="createDrinkPanel" class="panel panel-default">
+	 					<div class="panel-heading">
+	 						<h3 id="drinkInfoPanelTitle" class="panel-title">Create a New Drink</h3>
+	 					</div>
+	 					<div class="panel-body">
+	 						<h4>Selected Bar: <span class="barName"></span></h4>
+	 						<div class="input-group">
+	 							<span class="input-group-addon">
+	 								Drink Name:
+	 							</span>
+	 							<input type="text" class="form-control" id="drinkName" placeholder="Enter a drink name here...">
+	 						</div>
+	 						<div class="input-group">
+	 							<span class="input-group-addon">Drink Type:</span>
+								<input type="text" id="drinkType" class="form-control" placeholder="e.g. 'non-alcoholic', 'in-house', 'common-brand'">
+	 						</div>
+	 						<div class="input-group">
+	 							<span class="input-group-addon">Calories:</span>
+								<input type="text" id="calories" class="form-control" placeholder="Enter calorie count here...">
+	 						</div>
+	 						<div class="input-group">
+	 							<span class="input-group-addon">
+	 								Alcohol Content:
+	 							</span>
+								<input type="text" id="alcoholContent" class="form-control" placeholder="Alcohol content percentage...">
+	 						</div>
+	 						<div class="input-group">
+	 							<span class="input-group-addon">
+	 								Price:
+	 							</span>
+								<input type="text" id="price" class="form-control" placeholder="Enter your unit price here...">
+	 						</div>
+							<button id="Add" class="btn btn-success" style="width:100%;">Create Drink</button>
+	 					</div>
+	 				</div>
+	 				<div id="editDrinkPanel" class="panel panel-default">
+	 					<div class="panel-heading">
+	 						<h3 class="panel-title">Edit an Existing Drink</h3>
+	 					</div>
+	 					<div id="drinksPanel" class="panel-body">
+	 						<h4>Selected Bar: <span class="barName"></span></h4>
+	 						<div id="drinksList"></div>
+	 					</div>
+	 					<div id="drinkEditor" class="modal fade" tabindex="-1" role="dialog">
+	 						<div class="modal-dialog" role="document">
+	 							<div class="modal-content">
+	 								<div class="modal-header">
+	 									Edit <span id="drinkEditorDrink"></span>
+	 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	 								</div>
+	 								<div class="modal-body">
+				 						<div class="input-group">
+				 							<span class="input-group-addon">
+				 								Drink Name:
+				 							</span>
+				 							<input type="text" class="form-control" id="drinkNameEditor" placeholder="Enter a drink name here...">
+				 						</div>
+				 						<div class="input-group">
+				 							<span class="input-group-addon">Drink Type:</span>
+											<input type="text" id="drinkTypeEditor" class="form-control" placeholder="e.g. 'non-alcoholic', 'in-house', 'common-brand'">
+				 						</div>
+				 						<div class="input-group">
+				 							<span class="input-group-addon">Calories:</span>
+											<input type="text" id="caloriesEditor" class="form-control" placeholder="Enter calorie count here...">
+				 						</div>
+				 						<div class="input-group">
+				 							<span class="input-group-addon">
+				 								Alcohol Content:
+				 							</span>
+											<input type="text" id="alcoholContentEditor" class="form-control" placeholder="Alcohol content percentage...">
+				 						</div>
+				 						<div class="input-group">
+				 							<span class="input-group-addon">
+				 								Price:
+				 							</span>
+											<input type="text" id="priceEditor" class="form-control" placeholder="Enter your unit price here...">
+				 						</div>
+	 								</div>
+	 								<div class="modal-footer">
+	 									<button id="submitDrinkEdits" onclick="submitDrinkEdit()" class="btn btn-success">Submit</button>
+	 								</div>
+	 							</div>
+	 						</div>
+	 					</div>
+	 				</div>
+	 				<div id="deleteDrinkPanel" class="panel panel-default">
+	 					<div class="panel-heading">
+	 						<h3 class="panel-title">Delete an Existing Drink</h3>
+	 					</div>
+	 					<div class="panel-body">
+	 						<h4>Selected Bar: <span class="barName"></span></h4>
+	 						<div id="drinkDeletionList"></div>
+	 					</div>
+	 				</div>
+ 				</div>
+ 			</div>
+ 			<!-- END editor area -->
+
+ 			<!-- BEGIN search list -->
+ 			<div class="col-sm-4">
+ 				<div id="barListPanel">
+ 					<h3>Your Bars:</h3>
+ 					<div id="barList"></div>
+ 				</div>
+ 			</div>
+ 			<!-- END search list -->
  		</div>
 	 </div>
-
-	 
-<br></br>
-<form>
-	Drink Name: <input type="text" id="DrinkName" name="FirstName" value="Mickey"><br>
-	content: <input type="text" id="content" name="LastName" value="10"><br>
-	type: <input type="text" id="type" name="FirstName" value="M"><br>
-	calories: <input type="text" id="calories" name="LastName" value="200"><br>
-	price: <input type="text" id="price" name="FirstName" value="300"><br>
-	bar_id: <input type="text" id="barid" name="LastName" value="1"><br>
-	<input id="Add" type="button" value="ADD">
-</form>
-<br></br>
-<br></br>
-
-<form>
-	Drink To Delete: <input type="text" id="DrinkDelete" name="FirstName" value="Mickey"><br>
-	barid Delete: <input type="text" id="baridDelete" name="FirstName" value="1"><br>
-	<input id="Delete" type="button" value="DELETE">
-</form>
-
-<br></br>
-<br></br>
-
-<form>
-	Drink To Edit: <input type="text" id="DrinkEdit" name="FirstName" value="Mickey"><br>
-</form>
-<p>Value to edit : </p>
-	<select id="ValueEdit">
-		<option value = "alcohol_content">alcohol_cotent</option>
-		<option value = "type">type</option>
-		<option value = "price">price</option>
-		<option value = "calories">calories</option>
-	</select>
-<form>	
-	Value : <input type="text" id="Value" name="FirstName" value="0"><br>
-	barid Edit: <input type="text" id="baridEdit" name="FirstName" value="1"><br>
-	<input id="Edit" type="button" value="EDIT">
-</form>
-		
-		
  </body>
  <!-- END body -->
 
  <!-- BEGIN footer -->
  <footer>
 	 <script type="text/javascript" src="js/utility.js"></script>
-	 <script type="text/javascript" src="js/index.js"></script>
 	 <script type="text/javascript" src="js/edit.js"></script>
  </footer>
  <!-- END footer -->

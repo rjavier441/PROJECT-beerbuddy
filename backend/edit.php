@@ -1,12 +1,10 @@
 <?php
+    require "required/credentials.php";
     require "utility.php";
     // Acquire POST request body parameters
     $action = $_POST['action'];
     $data = $_POST['data'];
-    $credentials = [
-        "user" => "root",
-        "pwd" => "mysql"
-    ];
+    $credentials = $_CREDENTIALS["db"];
     $response = [
         "status" => "success",
         "message" => "OK"
@@ -34,28 +32,29 @@
         global $action, $response, $data, $credentials;  // force PHP to use the global variables
         
         // Instantiate a MySQL Connection
-        $mysqli = new mysqli("localhost", $credentials["user"], $credentials["pwd"], "beerbuddy");
+        $mysqli = new mysqli($credentials["host"], $credentials["user"], $credentials["pwd"], $credentials["name"]);
         if ($mysqli->connect_errno) {
             $response = formatResponse("failure", "MySQL connection failed: ($mysqli->connect_errno) $mysqli->connect_error");
         } else {
             // Perform requested action
-            try 
+            try
             {
+                $result = -1;
                 switch ($action) 
                 {
                     case "add":
                         $name = $data['name'];
-                        $name = mysql_real_escape_string($name);
+                        $name = mysqli_real_escape_string($mysqli, $name);
                         $type = $data['type'];
-                        $type = mysql_real_escape_string($type);
+                        $type = mysqli_real_escape_string($mysqli, $type);
                         $content = intval($data['content']);
-                        //$content = mysql_real_escape_string($content);
+                        //$content = mysqli_real_escape_string($mysqli, $content);
                         $calories = intval($data['calories']);
-                        //$calories = mysql_real_escape_string($calories);
+                        //$calories = mysqli_real_escape_string($mysqli, $calories);
                         $price = intval($data['price']);
-                        //$price = mysql_real_escape_string($price);
+                        //$price = mysqli_real_escape_string($mysqli, $price);
                         $barid = intval($data['barid']);
-                        //$barid = mysql_real_escape_string($barid);
+                        //$barid = mysqli_real_escape_string($mysqli, $barid);
 
                         $query = ("INSERT INTO drink (name, alcohol_content, type, calories, price, bar_id)
                         VALUES ('$name' , '$content' , '$type', '$calories' , '$price', '$barid')");
@@ -68,12 +67,12 @@
                         
                         break;
                     case "edit":
-                        $name =  mysql_real_escape_string($data['name']);
+                        $name =  mysqli_real_escape_string($mysqli, $data['name']);
                         $barid = intval($data['barid']);
-                        $editvalue = mysql_real_escape_string($data['editvalue']);
+                        $editvalue = mysqli_real_escape_string($mysqli, $data['editvalue']);
                         if($editvalue === "type")
                         {
-                            $value = mysql_real_escape_string($data['value']);
+                            $value = mysqli_real_escape_string($mysqli, $data['value']);
                         }
                         else
                         {
@@ -88,21 +87,73 @@
                         break;
                     case "delete":
                         $name = $data['name'];
-                        $name = mysql_real_escape_string($name);
+                        $name = mysqli_real_escape_string($mysqli, $name);
                         $barid = intval($data['barid']);
-                        $query = ("DELETE FROM drink WHERE name='$name' AND bar_id='$barid'");
+                        $query = ("DELETE FROM drink WHERE name='$name' AND bar_id=$barid");
                          if ($mysqli->query($query) === TRUE) {
-                            echo "Delete created successfully";
+                            $response = formatResponse("success", "Deletion successful");
                         } else {
-                            echo "Error: " . $query . "<br>" . $mysqli->error;
+                            $response = formatResponse("failure", "Deletion failed");
                         }
-                    break;
+                        break;
+                    case "getBars":
+                        $barOwner = mysqli_real_escape_string($mysqli, $data['user']);
+                        $query = ("SELECT * FROM bar WHERE username='$barOwner'");
+                        $result = $mysqli->query($query);
+
+                        if ($result === -1) {
+                            $response = formatResponse("failure", "Bar search failed");
+                        } else {
+                            $dataSet = [];
+
+                            // fill array
+                            while ($row = $result->fetch_assoc()) {
+                                $dataSet[] = $row;
+                            }
+
+                            $response = formatResponse("success", $dataSet);
+                        }
+                        break;
+                    case "getDrinks":
+                        $barID = intval(mysqli_real_escape_string($mysqli, $data['bar_id']));
+                        $query = ("SELECT * FROM drink WHERE bar_id=$barID");
+                        $result = $mysqli->query($query);
+
+                        if ($result === -1) {
+                            $response = formatResponse("failure", "Drink search failed");
+                        } else {
+                            $dataSet = [];
+
+                            while ($row = $result->fetch_assoc()) {
+                                $dataSet[] = $row;
+                            }
+
+                            $response = formatResponse("success", $dataSet);
+                        }
+                        break;
+                    case "editDrink":
+                        $oldname = mysqli_real_escape_string($mysqli, $data['oldname']);
+                        $newname = mysqli_real_escape_string($mysqli, $data['newname']);
+                        $newtype = mysqli_real_escape_string($mysqli, $data['newtype']);
+                        $newcalories = intval(mysqli_real_escape_string($mysqli, $data['newcalories']));
+                        $newalcohol = intval(mysqli_real_escape_string($mysqli, $data['newalcohol']));
+                        $newprice = intval(mysqli_real_escape_string($mysqli, $data['newprice']));
+                        $barID = mysqli_real_escape_string($mysqli, $data['bar_id']);
+                        $query = "UPDATE drink SET name='$newname', type='$newtype', calories='$newcalories', alcohol_content='$newalcohol', price='$newprice' WHERE name='$oldname'";
+                        $result = $mysqli->query($query);
+
+                        if ($result === FALSE) {
+                            $response = formatResponse("failure", "Drink update failed");
+                        } else {
+                            $response = formatResponse("success", "Drink update successful");
+                        }
+                        break;
                     default:
                         $response = formatResponse("failure","Invalid action '$action'");
                         break;
                 }
             } 
-            catch (Exception $e) 
+            catch (Exception $e)
             {
                 $response = formatResponse("failure", "An error occurred: $e");
             }

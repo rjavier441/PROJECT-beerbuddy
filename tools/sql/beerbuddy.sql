@@ -15,7 +15,7 @@ create table bar_owner
 	username		varchar(30) NOT NULL,
 	owner_name		varchar(50) NOT NULL,
     unique (username),
-	foreign key (username) references user(username)
+	foreign key (username) references user(username) ON DELETE CASCADE
 );
 
 create table bar
@@ -24,7 +24,7 @@ create table bar
 	bar_name		varchar(30) NOT NULL, 
 	bar_id INT(5) NOT NULL AUTO_INCREMENT,
 	primary key (bar_id,username),
-	foreign key (username) references bar_owner(username)
+	foreign key (username) references bar_owner(username) ON DELETE CASCADE
 );
 
 CREATE TABLE bar_location 
@@ -34,7 +34,7 @@ CREATE TABLE bar_location
     address varchar(25) not null,
 	bar_id INT(5) NOT NULL,
     unique (bar_id),
-    foreign key (bar_id) references bar(bar_id)
+    foreign key (bar_id) references bar(bar_id) ON DELETE CASCADE
 );
 
 CREATE TABLE drink
@@ -46,7 +46,7 @@ CREATE TABLE drink
 	price int(10),
 	bar_id INT(5) NOT NULL,
     primary key (bar_id, name),
-    foreign key (bar_id) references bar(bar_id)
+    foreign key (bar_id) references bar(bar_id) ON DELETE CASCADE
 );
 
 -- Ingredients
@@ -55,7 +55,7 @@ CREATE TABLE ingredients (
 	bar_id INT(5) NOT NULL,
 	ing_name VARCHAR(30) NOT NULL,
     primary key (bar_id, name, ing_name),
-    foreign key (bar_id, name) references drink(bar_id, name)
+    foreign key (bar_id, name) references drink(bar_id, name) ON DELETE CASCADE ON UPDATE CASCADE
     );
 
 -- ALTER TABLE ingredients ADD CONSTRAINT FK_ingredients_name 
@@ -72,7 +72,7 @@ CREATE TABLE serves
 	name VARCHAR(30) NOT NULL,
     primary key (username, bar_id, name),
     foreign key (username) references bar(username),
-    foreign key (bar_id, name) references drink(bar_id, name)
+    foreign key (bar_id, name) references drink(bar_id, name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ALTER TABLE serves ADD CONSTRAINT FK_serves_username FOREIGN 
@@ -86,7 +86,7 @@ CREATE TABLE in_house(
 	in_house_taste varchar(200),
 	bar_id INT(5) NOT NULL,
 	primary key (bar_id, name),
-    FOREIGN KEY (bar_id, name) REFERENCES drink(bar_id, name)
+    FOREIGN KEY (bar_id, name) REFERENCES drink(bar_id, name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE common_brand(
@@ -95,7 +95,7 @@ CREATE TABLE common_brand(
 	common_taste varchar(200),
 	bar_id INT(5) NOT NULL,
 	PRIMARY KEY(bar_id, name),
-	FOREIGN KEY (bar_id, name) REFERENCES drink(bar_id, name)
+	FOREIGN KEY (bar_id, name) REFERENCES drink(bar_id, name) ON DELETE CASCADE ON UPDATE CASCADE
 );
     
 CREATE TABLE rate_drink 
@@ -106,8 +106,8 @@ CREATE TABLE rate_drink
     taste varchar(200),
 	bar_id INT(5) NOT NULL,
     primary key (username, name, bar_id),
-    foreign key (username) references user(username),
-    foreign key (bar_id) references serves(bar_id)
+    foreign key (username) references user(username) ON DELETE CASCADE,
+    foreign key (bar_id) references serves(bar_id) ON DELETE CASCADE
 );
 
 CREATE TABLE rate_bar (
@@ -115,8 +115,8 @@ CREATE TABLE rate_bar (
 	bar_id INT(5) NOT NULL,
     stars integer NOT NULL,
     PRIMARY KEY (username, bar_id),
-    foreign key (username) references user(username),
-    foreign key (bar_id) references bar(bar_id)
+    foreign key (username) references user(username) ON DELETE CASCADE,
+    foreign key (bar_id) references bar(bar_id) ON DELETE CASCADE
 );
 
 -- ALTER TABLE drink ADD FOREIGN KEY (bar_id) REFERENCES serves(bar_id);
