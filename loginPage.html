@@ -12,7 +12,7 @@
  	<!-- Tab Title -->
  	<title>BeerBuddy</title>
 
-    <!-- Includes -->
+ 	<!-- Includes -->
  	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
  	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -21,27 +21,31 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 </head>
-<!-- END header -->
+<!-- BEGIN header -->
 
 <!-- BEGIN body -->
 <body style="background-color: #F9F9F9">
-    <div id="loginWrapper">
-        <h3><a href="index.html">BEER BUDDY</a></h3>
-        <h4>YOUR BUDDY IN BEER</h4>
-        <img src="css/clinking-beer-mugs.png" style="margin: 10px 0 -30px 0">
-        <div class="blurb">
-                    <h6>
-                        Beer Buddy is a new web application that introduces a rating system purely built for drinks and bars. The web application allows users to provide ratings and reviews, as well as view other users' ratings and reviews. 
-                        <br><br> 
-                        Bar owners now have the option of claiming their bar(s) to publicize their special in-house drinks and edit their drink menus.
-                    </h6>
-                </div>
-                <div class="buttons">
-                        <a href="loginPage.html"><button class="button"> LOG IN </button></a>
-                        <a href="registrationPage.html"><button class="button"> REGISTER </button></a>
-                </div>
-    </div>
-</body>
+        <div id="loginWrapper">
+            <h3><a href="index.html">BEER BUDDY</a></h3>
+            <h4>YOUR BUDDY IN BEER</h4>
+            <div class="container">  
+                <form id="form" action="backend/login.php" method="post">
+                    <label for="username">USERNAME</label>
+                    <fieldset>
+                        <input name="username" placeholder="YOUR USERNAME" type="text" tabindex="1" required>
+                    </fieldset>
+                    <label for="password">PASSWORD</label>
+                    <fieldset>
+                        <input name="password" placeholder="YOUR PASSWORD" type="password" tabindex="2" required>
+                    </fieldset>
+                    <fieldset>
+                        <button name="submit" type="submit" id="form-submit" data-submit="...Sending">LOG IN</button>
+                    </fieldset>
+                    <h5><a href="registrationPage.html">REGISTER HERE</a></h5>
+                </form>
+            </div>
+        </div>
+    </body>
 <!-- END body -->
 
 <!-- BEGIN footer -->

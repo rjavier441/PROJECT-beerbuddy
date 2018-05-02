@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN header -->
+<head>
+	<!-- Metadata -->
+ 	<meta charset="UTF-8">
+ 	<meta name="description" content="A beer and bar rating application">
+ 	<meta name="author" content="M.Chew, R. Javier, T. Mai, V. Singh, C.Wang">
+ 	<meta name="keywords" content="beer,buddy,rating,application">
+ 	<meta name="last-modified" content="April 24, 2018">
+
+ 	<!-- Tab Title -->
+ 	<title>BeerBuddy</title>
+
+ 	<!-- Includes -->
+ 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/registrationPage.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+</head>
+<!-- BEGIN header -->
+
+<!-- BEGIN body -->
+<body style="background-color: #F9F9F9">
+        <div id="registrationWrapper">
+            <h3><a href="index.html">BEER BUDDY</a></h3>
+            <h4>YOUR BUDDY IN BEER</h4>
+            <div class="container">  
+                <form id="form" action="backend/registration.php" method="post">
+                    <label for="birthdate">BIRTH DATE</label>
+                    <fieldset>
+                        <input name="birthdate" placeholder="yyyy-mm-dd" type="date" tabindex="1" required autofocus>
+                    </fieldset>
+                    <label for="username">USERNAME</label>
+                    <fieldset>
+                        <input name="username" placeholder="YOUR USERNAME" type="text" tabindex="2" required>
+                    </fieldset>
+                    <label for="passwdamniord">PASSWORD</label>
+                    <fieldset>
+                        <input name="password" placeholder="YOUR PASSWORD" type="password" tabindex="3" required>
+                    </fieldset>
+                    <fieldset>
+                        <button name="submit" type="submit" id="form-submit" data-submit="...Sending" value="register">REGISTER</button>
+                    </fieldset>
+                    <h5><a href="loginPage.html">LOG IN HERE</a></h5>
+                </form>
+            </div>
+        </div>
+    </body>
+<!-- END body -->
+
+<!-- BEGIN footer -->
+<footer></footer>
+<!-- END footer -->
+</html>

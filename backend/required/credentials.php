@@ -15,7 +15,7 @@
 		"db" => [
 			"name" => "beerbuddy",
 			"user" => "root",
-			"pwd" => "root",
+			"pwd" => "cwang1984",
 			"host" => "127.0.0.1"
 		]
 	];

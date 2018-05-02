@@ -1,0 +1,169 @@
+h3
+{
+    font-family: 'Oswald', sans-serif;
+    font-size: 3em;
+    margin-bottom: -7px;
+    font-weight: none;
+    padding-top: 10px;
+}
+
+h4
+{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+h5
+{
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: normal;
+}
+
+a, a:hover
+{
+    text-decoration: none;
+}
+
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	-moz-font-smoothing:antialiased;
+	-o-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+}
+
+.container 
+{
+	max-width: 60%;
+	width: 100%;
+	margin: -20px auto;
+	position: relative;
+    font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	font-size: 17px;
+	line-height: 30px;
+	color: #777;
+    text-align: left;
+}
+
+#form input[type="text"], #form input[type="password"], #form input[type="date"], #form textarea, #form button[type="submit"] 
+{ 
+    font: 400 14px/17px 'Oxygen', sans-serif;
+}
+
+#form 
+{
+	background:#F9F9F9;
+	padding:25px;
+	margin:50px 0;
+}
+
+fieldset 
+{
+	border: medium none !important;
+	margin: 0 0 10px;
+	min-width: 100%;
+	padding: 0;
+	width: 100%;
+}
+
+#form input[type="text"], #form input[type="password"], #form input[type="date"], #form textarea 
+{
+	width:100%;
+	border:1px solid #CCC;
+	background:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+}
+
+#form input[type="text"]:hover, #form input[type="password"]:hover, #form input[type="date"]:hover, #form textarea:hover 
+{
+	-webkit-transition:border-color 0.3s ease-in-out;
+	-moz-transition:border-color 0.3s ease-in-out;
+	transition:border-color 0.3s ease-in-out;
+	border:1px solid #AAA;
+}
+
+#form textarea 
+{
+	height:100px;
+	max-width:100%;
+    resize:none;
+}
+
+#form button[type="submit"] 
+{
+	cursor:pointer;
+	width:100%;
+	border:none;
+	background-color:#57bdfd;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:17px;
+    font-family: 'Oswald', sans-serif;
+}
+
+#form button[type="submit"]:hover 
+{
+	background-color:#2facfb;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+#form button[type="submit"]:active { box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5); }
+#form input:focus, #form textarea:focus 
+{
+	outline:0;
+	border:1px solid #999;
+}
+
+::-webkit-input-placeholder 
+{
+    color:#888;
+    font-family: 'Oswald', sans-serif;
+}
+
+:-moz-placeholder 
+{
+    color:#888;
+    font-family: 'Oswald', sans-serif;
+}
+
+::-moz-placeholder 
+{
+    color:#888;
+    font-family: 'Oswald', sans-serif;
+}
+
+:-ms-input-placeholder 
+{
+    color:#888;
+    font-family: 'Oswald', sans-serif;
+}
+
+#registrationWrapper
+{
+    max-width: 100%;
+    background-color: #F9F9F9;
+    margin: 0 auto 50px auto;
+    padding: 0;
+    text-align: center;
+    overflow: none;
+}
+
+#registrationWrapper a, a:hover
+{
+    text-decoration: none;
+    color: #000;
+}
