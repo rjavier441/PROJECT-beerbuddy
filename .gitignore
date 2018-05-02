@@ -1,2 +1,5 @@
-credentials.php
-*/.DS_Store
+# Ignore credential file changes
+*credentials.php
+
+# Ignore miscellaneous files
+*DS_Store
