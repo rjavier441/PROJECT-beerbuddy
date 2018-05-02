@@ -1,0 +1,97 @@
+<!-- 
+	PROJECT: 		BeerBuddy
+	Name: 			Rolando Javier
+	File: 			index.html
+	Date Created: 	April 24, 2018
+	Last Modified: 	April 24, 2018
+	Details:
+		This file serves as the Beer Buddy Homepage
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <!-- BEGIN header -->
+ <head>
+ 	<!-- Metadata -->
+ 	<meta charset="UTF-8">
+ 	<meta name="description" content="A beer and bar rating application">
+ 	<meta name="author" content="M.Chew, R. Javier, T. Mai, V. Singh, C.Wang">
+ 	<meta name="keywords" content="beer,buddy,rating,application">
+ 	<meta name="last-modified" content="April 24, 2018">
+
+ 	<!-- Phone Screen Compatibility -->
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+ 	<!-- Tab Title -->
+ 	<title>BeerBuddy</title>
+
+ 	<!-- Includes -->
+ 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+ </head>
+ <!-- END header -->
+ <!-- BEGIN body -->
+ <body>
+ 	<div class="container-fluid">
+ 		<div class="row">
+ 			<div class="well">
+ 				<h1 class="bb-header">Beer Buddy</h1>
+ 				<h3>Your buddy in beer!</h3>
+ 			</div>
+ 		</div>
+	 </div>
+
+	 
+<br></br>
+<form>
+	Drink Name: <input type="text" id="DrinkName" name="FirstName" value="Mickey"><br>
+	content: <input type="text" id="content" name="LastName" value="10"><br>
+	type: <input type="text" id="type" name="FirstName" value="M"><br>
+	calories: <input type="text" id="calories" name="LastName" value="200"><br>
+	price: <input type="text" id="price" name="FirstName" value="300"><br>
+	bar_id: <input type="text" id="barid" name="LastName" value="1"><br>
+	<input id="Add" type="button" value="ADD">
+</form>
+<br></br>
+<br></br>
+
+<form>
+	Drink To Delete: <input type="text" id="DrinkDelete" name="FirstName" value="Mickey"><br>
+	barid Delete: <input type="text" id="baridDelete" name="FirstName" value="1"><br>
+	<input id="Delete" type="button" value="DELETE">
+</form>
+
+<br></br>
+<br></br>
+
+<form>
+	Drink To Edit: <input type="text" id="DrinkEdit" name="FirstName" value="Mickey"><br>
+</form>
+<p>Value to edit : </p>
+	<select id="ValueEdit">
+		<option value = "alcohol_content">alcohol_cotent</option>
+		<option value = "type">type</option>
+		<option value = "price">price</option>
+		<option value = "calories">calories</option>
+	</select>
+<form>	
+	Value : <input type="text" id="Value" name="FirstName" value="0"><br>
+	barid Edit: <input type="text" id="baridEdit" name="FirstName" value="1"><br>
+	<input id="Edit" type="button" value="EDIT">
+</form>
+		
+		
+ </body>
+ <!-- END body -->
+
+ <!-- BEGIN footer -->
+ <footer>
+	 <script type="text/javascript" src="js/utility.js"></script>
+	 <script type="text/javascript" src="js/index.js"></script>
+	 <script type="text/javascript" src="js/edit.js"></script>
+ </footer>
+ <!-- END footer -->
+ </html>
