@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     // Bind homepage redirect to the logout button
     $("#logout").on("click", function () {
-        window.location = "index.html";
+        logout();
     });
 
     // Start page with initial values
@@ -41,6 +41,9 @@ function init() {
         currentUsername = sessionStorage.getItem("username");
     }
     $("#username").html(currentUsername);
+
+    // Get client's info
+    getClientInfo();
 
     // Run an initial search
     $("#submitSearch").click();
@@ -127,6 +130,60 @@ function renderAverages () {
 
 // Controllers
 /*
+    @function   logout
+*/
+function logout () {
+    var callback = function (reply, status, jqxhr) {
+        console.log(`Status: ${status}\nReply (${typeof reply}): ${reply}`);    // debug
+        try {
+            reply = JSON.parse(reply);
+            switch (status) {
+                case "error": {
+                    var msg = `An error occurred`;
+                    console.log(msg);
+                    setError(msg);
+                    break;
+                }
+                case "success": {
+                    console.log(`Logout successful: ${reply.message}`);
+                    setError(`Logout successful`);
+                    window.location = reply.message.redirect;
+                    break;
+                }
+                default: {
+                    var msg = `An unknown status was received: "${status}"`;
+                    console.log(msg);
+                    setError(msg);
+                    break;
+                }
+            }
+        } catch (e) {
+            console.log(e);
+            setError(`Invalid reply format: ${e}`);
+        }
+    };
+
+    // post("http://localhost/beerbuddy/backend/logout.php", {}, callback, true);
+    var options = {
+        "async": true,
+        "method": "GET",
+        "success": function (data, status, jqxhr) {
+            if (callback) {
+                callback(data, status, jqxhr);
+            }
+            logDebug("post()", "ajax request result", "success");
+        },
+        "error": function (jqxhr, status, err) {
+            if (callback) {
+                callback(err, status, jqxhr);
+            }
+            logDebug("post()", "ajax request result", `failure -> ${err}`);
+        }
+    };
+    $.ajax("http://localhost/beerbuddy/backend/logout.php", options);
+}
+
+/*
     @function   setSearchType
     @parameter  str - the value to set the search type as
     @returns    n/a
@@ -156,6 +213,59 @@ function updateModel (key, value) {
 */
 function setError (msg) {
     $("#error").html(msg);
+}
+
+/*
+    @function   getClientInfo
+    @parameter  n/a
+    @returns    a JSON object with the session data (i.e. the logged-in client's username)
+    @details    This function is useful for pulling session data from the server
+*/
+function getClientInfo () {
+    var data = {
+        "action": "getInfo",
+        "data": ""
+    };
+
+    var callback = function (reply, status, jqxhr) {
+        console.log(`Status: ${status}\nReply (${typeof reply}): ${reply}`);    // debug
+
+        try {
+            reply = JSON.parse(reply);
+            switch (status) {
+                case "error": {
+                    console.log("A request error occurred");
+                    setError("A request error occurred");
+                    break;
+                }
+                case "success": {
+                    var replyHasMessage = (typeof reply.message === "undefined") ? false : true;
+                    var replyHasStatus = (typeof reply.status === "undefined") ? false : true;
+                    var messageHasUsername = (!replyHasMessage) ? false : (typeof reply.message.username === "undefined") ? false : true;
+
+                    if (replyHasStatus && messageHasUsername) {
+                        console.log(`Welcome, ${reply.message.username}`);
+                        $("#username").html(reply.message.username);
+                    } else {
+                        console.log(`Invalid reply`);
+                        setError("Invalid reply");
+                    }
+                    break;
+                }
+                default: {
+                    console.log("An unknown issue occurred");
+                    setError("An unknown issue occurred");
+                    break;
+                }
+            }
+        } catch (e) {
+            console.log(e);
+            setError("Invalid response format");
+        }
+    };
+
+    setError("");
+    post("http://localhost/beerbuddy/backend/readRating.php", data, callback, true);
 }
 
 /*

@@ -14,6 +14,9 @@
     require "required/credentials.php";
     require "utility.php";
 
+    // Acquire the client's session data (which was saved to the server via login.php)
+    session_start();    // you can access it via the $_SESSION superglobal
+
     // Acquire POST request body parameters
     $action = $_POST['action'];
     $data = $_POST['data'];
@@ -54,6 +57,12 @@
                 switch ($action) {
                     case "ping":
                         $response = formatResponse("success", "Hi!");
+                        break;
+                    case "getInfo":
+                        $clientInfo = [
+                            "username" => $_SESSION['username']
+                        ];
+                        $response = formatResponse("success", $clientInfo);
                         break;
                     case "search":
                         $searchTerm = $data['search'];

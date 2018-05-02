@@ -3,3 +3,4 @@
 
 # Ignore miscellaneous files
 *DS_Store
+backend/test.php

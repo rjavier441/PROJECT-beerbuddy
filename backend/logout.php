@@ -1,10 +1,18 @@
 <?php
-// echo "logged out";
-if($_POST["ajax"])
-{
-$response = formatResponse("success", "logging out");
+require "utility.php";
+
+session_start();
+
+$username = $_SESSION['username'];
+
+$msg = [
+	"info" => "logged out $username",
+	"redirect" => "http://localhost/beerbuddy"
+];
+
+$response = formatResponse("success", $msg);
 replyToClient($response);
-header('Location: http://localhost/beerbuddy/index.html');
-exit();
-}
+$_SESSION = array();
+
+session_destroy();
 ?>

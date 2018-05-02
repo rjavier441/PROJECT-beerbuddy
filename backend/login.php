@@ -3,6 +3,9 @@ require "utility.php";
 require "required/credentials.php";
 session_start(); 
 
+// Unset all session variables
+$_SESSION = array();
+
 $username = "";
 $password = "";
 $errors = array();
