@@ -41,7 +41,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
         $results = mysqli_query($db, $query);
         
-        $_SESSION['username'] = $user_id;
+        $_SESSION['username'] = $username;
       
         if (mysqli_num_rows($results) == 1) 
         {
