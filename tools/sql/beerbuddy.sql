@@ -14,7 +14,7 @@ create table bar_owner
 (
 	username		varchar(30) NOT NULL,
 	owner_name		varchar(50) NOT NULL,
-    unique (username),
+    primary key (username),
 	foreign key (username) references user(username) ON DELETE CASCADE
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE bar_location
     state_name varchar(25) not null,
     address varchar(25) not null,
 	bar_id INT(5) NOT NULL,
-    unique (bar_id),
+    primary key (bar_id),
     foreign key (bar_id) references bar(bar_id) ON DELETE CASCADE
 );
 
