@@ -55,7 +55,7 @@
 			<!-- END user pane -->
 
 			<!-- BEGIN ratings feed -->
-			<div class="col-sm-9">
+			<div class="col-sm-3">
 				<button id="changeMode" type="text" name="switchModes">Change Mode</button>
 				<div id= "drink_inputs" class="input_rating_drink" style="padding:10px;">
 						<form>
@@ -101,6 +101,25 @@
 					</div>
 				</div>
 				<input id="submitInfo" type="submit" value="Submit">
+			</div>
+
+			<div class="col-sm-3">
+				<h3>
+					Create New Drink Rating
+				</h3>
+				<div>
+					Drink Name <input type="text" id="newdrinkname" placeholder="name here">
+				</div>
+				<div>
+					Bar Name <input type="text"  id="newdrinkbar" placeholder="bar name">
+				</div>
+				<div>
+					Stars <input type="text" id="newdrinkstars" placeholder="i.e. 1-5">
+				</div>
+				<div>
+					Taste <input type="text" id="newdrinktaste" placeholder="description">
+				</div>
+				<button class="btn btn-success" onclick="submitNewRating()">Submit</button>
 			</div>
 
 			<!-- END ratings feed -->

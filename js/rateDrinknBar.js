@@ -207,4 +207,35 @@ function getCurrentUser () {
 
     post(url, data, callback, true);
 }
+
+function submitNewRating () {
+    var data = {
+        "name": $("#newdrinkname").val(),
+        "stars": Number.parseInt($("#newdrinkstars").val()),
+        "bar_name": $("#newdrinkbar").val(),
+        "taste": $("#newdrinktaste").val(),
+        "username": $("#username").html(),
+        "action": "newRating"
+    };
+    var callback = function (reply, status, jqxhr) {
+        try {
+            reply = JSON.parse(reply);
+            switch (status) {
+                case "success": {
+                    console.log(reply);
+                    break;
+                }
+                default: {
+                    console.log("Error!");
+                    break;
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    var url = "http://localhost/beerbuddy/backend/rateDrinknBar.php";
+
+    post(url, data, callback, true);
+}
 // END ratingsPage.js

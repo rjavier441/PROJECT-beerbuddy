@@ -14,6 +14,8 @@
     require  "utility.php";
     require  "required/credentials.php";
 
+    $action = $_POST['action'];
+
             // Acquire POST request body parameter
 
     $response = formatResponse("success", $data);
@@ -42,7 +44,7 @@
     // @returns     n/a
     // @details     This function processes input from the client and responds based on the information given
     function processInput() {
-        global $state, $response, $data, $credentials;  // force PHP to use the global variables
+        global $action, $state, $response, $data, $credentials;  // force PHP to use the global variables
         $state = $_POST['state'];
         $username = $_POST['username'];
         $data["searchBar"] = $_POST['btitle'];
@@ -143,6 +145,27 @@
 
                         $response = formatResponse("failure","Invalid action '$action'");
                         break;
+                }
+
+                if ($action == "newRating") {
+                    $drinkname = mysqli_real_escape_string($mysqli, $_POST['name']);
+                    $stars = intval($_POST['stars']);
+                    $bar_name = mysqli_real_escape_string($mysqli, $_POST['bar_name']);
+                    $taste = mysqli_real_escape_string($mysqli, $_POST['taste']);
+                    $username = mysqli_real_escape_string($mysqli, $_POST['username']);
+
+                    $query = "SELECT bar_id FROM bar WHERE bar_name='$bar_name'";
+                    $barID_Query = $mysqli->query($query);
+
+                    $row = $barID_Query->fetch_assoc();
+                    $barID = $row['bar_id'];
+
+                    $insertion = "INSERT INTO rate_drink(username,name,bar_id,stars,taste) VALUES ('$username', '$drinkname', '$barID', '$stars', '$taste')";
+                    if ($mysqli->query($insertion)) {
+                        $response = formatResponse("success", "New rating submission successful");
+                    } else {
+                        $response = formatResponse("failure", "Failed to submit rating: $insertion");
+                    }
                 }
             } catch (Exception $e) {
                 $response = formatResponse("failure", "An error occurred: $e");
