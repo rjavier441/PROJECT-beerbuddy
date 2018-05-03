@@ -1,0 +1,23 @@
+[main] collect2 1002 (0) exception: trapped!
+[main] collect2 1002 (0) exception: code 0xC0000005 at 0x655CAEB
+[main] collect2 1002 (0) exception: ax 0x4512D08 bx 0x240FF24 cx 0xBE31D90 dx 0x0
+[main] collect2 1002 (0) exception: si 0x3AA di 0x240F158 bp 0x240E49C sp 0x240E49C
+[main] collect2 1002 (0) exception: exception is: STATUS_ACCESS_VIOLATION
+[main] collect2 1002 (0) stack: Stack trace:
+[main] collect2 1002 (0) stack: frame 0: sp = 0x240DEA8, pc = 0x653A2C3
+[main] collect2 1002 (0) stack: frame 1: sp = 0x240DEE4, pc = 0x77BD9DF2
+[main] collect2 1002 (0) stack: frame 2: sp = 0x240DF08, pc = 0x77BD9DC4
+[main] collect2 1002 (0) stack: frame 3: sp = 0x240DFD4, pc = 0x77BC0CB6
+[main] collect2 1002 (0) stack: frame 4: sp = 0x240E49C, pc = 0x655D849
+[main] collect2 1002 (0) stack: frame 5: sp = 0x240F534, pc = 0x655E60F
+[main] collect2 1002 (0) stack: frame 6: sp = 0x240F568, pc = 0x655E834
+[main] collect2 1002 (0) stack: frame 7: sp = 0x240F984, pc = 0x655E7F4
+[main] collect2 1002 (0) stack: frame 8: sp = 0x240F9A0, pc = 0x402F34
+[main] collect2 1002 (0) stack: frame 9: sp = 0x240F9C0, pc = 0x404739
+[main] collect2 1002 (0) stack: frame 10: sp = 0x240F9D8, pc = 0x4053DE
+[main] collect2 1002 (0) stack: frame 11: sp = 0x240F9F8, pc = 0x402B6E
+[main] collect2 1002 (0) stack: frame 12: sp = 0x240FA64, pc = 0x6534402
+[main] collect2 1002 (0) stack: frame 13: sp = 0x240FF48, pc = 0x6534420
+[main] collect2 1002 (0) stack: frame 14: sp = 0x240FF54, pc = 0x40B87E
+[main] collect2 1002 (0) stack: frame 15: sp = 0x240FF64, pc = 0x40103A
+[main] collect2 1002 (0) stack: End of stack trace (more stack frames may be present)

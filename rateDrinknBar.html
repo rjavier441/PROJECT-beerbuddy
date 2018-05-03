@@ -1,0 +1,124 @@
+<!-- 
+	PROJECT: 		BeerBuddy
+	Name: 			Varinder Singh
+	File: 			rateDrinknBar.html
+	Date Created: 	April 29, 2018
+	Last Modified: 	April 29, 2018
+	Details:
+		This file as the rating page
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN header -->
+<head>
+	<!-- Metadata -->
+ 	<meta charset="UTF-8">
+ 	<meta name="description" content="A beer and bar rating application">
+ 	<meta name="author" content="M.Chew, R. Javier, T. Mai, V. Singh, C.Wang">
+ 	<meta name="keywords" content="beer,buddy,rating,application">
+ 	<meta name="last-modified" content="April 24, 2018">
+
+ 	<!-- Tab Title -->
+ 	<title>BeerBuddy</title>
+
+ 	<!-- Includes -->
+ 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="css/ratingSystem.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+
+	<!---->
+
+</head>
+<!-- BEGIN header -->
+
+
+<!-- BEGIN body -->
+<body>
+	<div class="container-fluid" style="margin: 10px;">
+		<div class="row">
+			<!-- BEGIN user pane -->
+			<div class="col-sm-3">
+				<h3>BeerBuddy</h3>
+				<h5>Username: <span id="username"></span></h5>
+				<button id="logout" class="btn btn-danger" style="min-width: 100%;">Logout</button>
+				<span>
+					Are you a bar owner? Edit bar/drink info <a href="http://localhost/beerbuddy/edit.html">here</a>!
+				</span>
+				 <span>
+					Go to the ratings page <a href="http://localhost/beerbuddy/ratingsPage.html">here</a>!
+				</span>
+			</div>
+			<!-- END user pane -->
+
+			<!-- BEGIN ratings feed -->
+			<div class="col-sm-9">
+				<button id="changeMode" type="text" name="switchModes">Change Mode</button>
+				<div id= "drink_inputs" class="input_rating_drink" style="padding:10px;">
+						<form>
+							Name of the Drink:<br>
+							<input id="searchDrink" type="text" name="bar_name">
+						</form>	
+						<form>
+							Name of the Bar:<br>
+							<input id="searchBarForDrink" type="text" name="bar_name">
+
+						</form>						
+						<form>
+							Describe your drink:<br>
+							<input id="describeDrink" type="text" name="description">
+						</form>
+							Rate this drink!<br>
+							<input id="rateDrink" type="text" name="rate_drink">
+
+						<!--<div class="stars raitings_stars"> 
+							<span id= "rd1" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id= "rd2" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id= "rd3" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id= "rd4" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id= "rd5" class="highlightable glyphicon glyphicon-star-empty"></span>
+
+						</div> -->
+				</div>
+				<div id="bar_inputs" class="input_rating_bar" style="padding:10px;">
+					<form>
+						Name of the Bar:<br>
+						<input id="searchBar" type="text" name="bar_name">
+					</form>						
+					Rate this bar!<br>
+					<input id="rateBar" type="text" name="rate_drink">
+					<div id="rb1" class="rate_widget">
+					<!--	<div class="stars raitings_stars"> 
+							<span id="rb1" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id="rb2" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id="rb3" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id="rb4" class="highlightable glyphicon glyphicon-star-empty"></span>
+							<span id="rb5" class="highlightable glyphicon glyphicon-star-empty"></span>
+						</div>  -->
+					</div>
+				</div>
+				<input id="submitInfo" type="submit" value="Submit">
+			</div>
+
+			<!-- END ratings feed -->
+		</div>
+	</div>
+
+
+
+  
+</body>
+<!-- END body -->
+
+<!-- BEGIN footer -->
+<footer>
+<script src="js/utility.js"></script>
+<script src="js/rateDrinknBar.js"></script>
+</footer>
+<!-- END footer -->
+<!-- JQuery add class -->
+
+</html>
