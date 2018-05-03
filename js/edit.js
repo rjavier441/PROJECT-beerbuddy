@@ -30,7 +30,9 @@ var model = {
     "mode": "delete",
     "barList": [],
     "drinkList": [],
-    "selectedBar": -1
+    "selectedBar": -1,
+    "selectedBarFavoritesStats": [],
+    "selectedBarServiceStats": []
 };
 
 $(document).ready(init);
@@ -127,33 +129,39 @@ function changeMode (newmode) {
     renderUI();
 }
 
-// document.getElementById('Add').onclick = function() 
-// {
-//  buffer.name = document.getElementById('DrinkName').value ; 
-//  buffer.content = document.getElementById('content').value ; 
-//  buffer.type = document.getElementById('type').value ; 
-//  buffer.calories = document.getElementById('calories').value ; 
-//  buffer.price = document.getElementById('price').value ; 
-//  buffer.barid = document.getElementById('barid').value ; 
-//  console.log(buffer);
-//  add(buffer);
-// }
+function getBarStats () {
+    var bar_id = model.selectedBar;
+    var data = {
+        "action": "getBarStats",
+        "data": {
+            "bar_id": bar_id
+        }
+    };
+    var callback = function (reply, status, jqxhr) {
+        console.log(`Status: ${status}\nReply (${typeof reply}): ${reply}`);    // debug
 
-// document.getElementById('Delete').onclick = function() 
-// {
-//  var drink = document.getElementById('DrinkDelete').value ; 
-//  var id =  document.getElementById('baridDelete').value ;
-//  deletes(drink,id);
-// }
-
-// document.getElementById('Edit').onclick = function() 
-// {
-//  var drink = document.getElementById('DrinkEdit').value ; 
-//  var id =  document.getElementById('baridEdit').value ;
-//  var value_edit = document.getElementById('ValueEdit').value;
-//  var value = document.getElementById('Value').value;
-//  edit(drink,id,value_edit,value);
-// }
+        try {
+            reply = JSON.parse(reply);
+            switch (status) {
+                case "success": {
+                    model.selectedBarFavoritesStats = reply.message["top3drinkavg"];
+                    model.selectedBarServiceStats = reply.message.baravg;
+                    renderStatsReport();
+                    break;
+                }
+                default: {
+                    console.log("Something went wrong");
+                    setError("Bar stats request failed");
+                    break;
+                }
+            }
+        } catch (e) {
+            console.log(e);
+            setError("Invalid input format");
+        }
+    };
+    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+}
 
 function setError (msg) {
     $("#error").html(msg);
@@ -356,6 +364,7 @@ function setSelectedBar (bar_name, bar_id) {
     console.log("Setting bar name to " + unescape(bar_name));
     setBarName(unescape(bar_name));
     model.selectedBar = bar_id;
+    getBarStats(bar_id);
 
     // Contextual actions
     switch (model.mode) {
@@ -438,6 +447,42 @@ function renderBarList () {
     }
 
     $("#barList").html(td);
+}
+
+function renderStatsReport () {
+    var td = "";
+
+    td += "<div>";
+    td += `<h3>Your bar's average rating: <span class="glyphicon glyphicon-star"></span>${model.selectedBarServiceStats[0].average}</h3>`;
+    td += "</div>";
+
+    td += "<div>";
+    for (var i = 0; i < model.selectedBarFavoritesStats.length; i++) {
+        var drink = model.selectedBarFavoritesStats[i];
+        var classname = "label-danger";
+        var position = "3rd";
+        switch (i) {
+            case 0: {
+                classname = "label-warning";
+                position = "1st";
+                break;
+            }
+            case 1: {
+                classname = "label-default";
+                position = "2nd";
+                break;
+            }
+        }
+        td += `<h4><span class="label ${classname}">${position}</span> ${drink.name} <span class="glyphicon glyphicon-star"></span>${drink.average}</h4>`;
+    }
+
+    if (model.selectedBarFavoritesStats.length < 1) {
+        td += `<h4>No available ratings</h4>`;
+    }
+
+    td += "</div>";
+
+    $("#barStats").html(td);
 }
 
 function getMyDrinks (name, id) {

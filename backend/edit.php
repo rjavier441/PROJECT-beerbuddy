@@ -114,6 +114,36 @@
                             $response = formatResponse("success", $dataSet);
                         }
                         break;
+                    case "getBarStats":
+                        $result2 = -1;
+                        $barID = intval(mysqli_real_escape_string($mysqli, $data['bar_id']));
+                        $query = "SELECT name,AVG(stars) AS average FROM rate_drink WHERE bar_id=$barID GROUP BY name ORDER BY average DESC LIMIT 3";
+                        $query2 = "SELECT b.bar_name,AVG(stars) AS average FROM rate_bar AS r LEFT OUTER JOIN bar AS b ON b.bar_id=r.bar_id WHERE b.bar_id=$barID GROUP BY b.bar_name";
+                        $result = $mysqli->query($query);   // drink ratings
+                        $result2 = $mysqli->query($query2);  // bar ratings
+
+                        if ($result === -1 || $result2 === -1) {
+                            $response = formatResponse("failure", "Bar stat search failed");
+                        } else {
+                            $drinkStats = [];
+                            $barStats = [];
+
+                            while ($row = $result->fetch_assoc()) {
+                                $drinkStats[] = $row;
+                            }
+
+                            while ($row = $result2->fetch_assoc()) {
+                                $barStats[] = $row;
+                            }
+
+                            $output = [
+                                "top3drinkavg" => $drinkStats,
+                                "baravg" => $barStats
+                            ];
+
+                            $response = formatResponse("success", $output);
+                        }
+                        break;
                     case "getDrinks":
                         $barID = intval(mysqli_real_escape_string($mysqli, $data['bar_id']));
                         $query = ("SELECT * FROM drink WHERE bar_id=$barID");
