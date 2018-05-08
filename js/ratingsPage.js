@@ -10,6 +10,7 @@
 //                  utility.js
 
 // Model
+var hostname = "localhost";
 var model = {
     "searchType": "bar",
     "searchResults": [],
@@ -163,7 +164,7 @@ function logout () {
         }
     };
 
-    // post("http://localhost/beerbuddy/backend/logout.php", {}, callback, true);
+    // post(`http://${hostname}/beerbuddy/backend/logout.php`, {}, callback, true);
     var options = {
         "async": true,
         "method": "GET",
@@ -180,7 +181,7 @@ function logout () {
             logDebug("post()", "ajax request result", `failure -> ${err}`);
         }
     };
-    $.ajax("http://localhost/beerbuddy/backend/logout.php", options);
+    $.ajax(`http://${hostname}/beerbuddy/backend/logout.php`, options);
 }
 
 /*
@@ -265,7 +266,7 @@ function getClientInfo () {
     };
 
     setError("");
-    post("http://localhost/beerbuddy/backend/readRating.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/readRating.php`, data, callback, true);
 }
 
 /*
@@ -330,7 +331,7 @@ function submitSearch (search, type) {
     };
 
     setError("");
-    post("http://localhost/beerbuddy/backend/readRating.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/readRating.php`, data, callback, true);
 }
 
 // END ratingsPage.js

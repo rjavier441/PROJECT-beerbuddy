@@ -11,6 +11,7 @@
 //                  utility.js
 
 // Model
+var hostname = "localhost";
 var model = {
     "searchType": "drink"
 };
@@ -104,7 +105,7 @@ $(document).ready(function () {
                 console.log("Darnit");
             }
         };
-        var url = "http://localhost/beerbuddy/backend/logout.php";
+        var url = `http://${hostname}/beerbuddy/backend/logout.php`;
 
         post(url, data, callback, true);
     });
@@ -172,7 +173,7 @@ function submitRating (searchBar, rateBar, searchDrink, searchBarForDrink, descr
     };
 
     //reply will be echo
-    post("http://localhost/beerbuddy/backend/rateDrinknBar.php",data,callback, true); 
+    post(`http://${hostname}/beerbuddy/backend/rateDrinknBar.php`,data,callback, true); 
 
 }
 
@@ -184,7 +185,7 @@ function getCurrentUser () {
         "action": "getInfo",
         "data": ""
     };
-    var url = "http://localhost/beerbuddy/backend/readRating.php";
+    var url = `http://${hostname}/beerbuddy/backend/readRating.php`;
     var callback = function (reply, status, jqxhr) {
         console.log(reply);
         try {
@@ -234,7 +235,7 @@ function submitNewRating () {
             console.log(e);
         }
     };
-    var url = "http://localhost/beerbuddy/backend/rateDrinknBar.php";
+    var url = `http://${hostname}/beerbuddy/backend/rateDrinknBar.php`;
 
     post(url, data, callback, true);
 }

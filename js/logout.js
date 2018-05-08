@@ -1,5 +1,7 @@
 $(document).ready(init);
 
+var hostname = "localhost";
+
 function init()
 {
 	$("#submit2").on("click", logout);
@@ -8,8 +10,8 @@ function init()
 function logout() 
 {
 	console.log("logging out");
-	post("http://localhost/beerbuddy/backend/logout.php", "ajax", null, true);
-	// window.location = "http://localhost/beerbuddy/";
+	post(`http://${hostname}/beerbuddy/backend/logout.php`, "ajax", null, true);
+	// window.location = `http://${hostname}/beerbuddy/`;
 	// $.get("backend/logout.php");
 }
 

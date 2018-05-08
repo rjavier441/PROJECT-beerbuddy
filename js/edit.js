@@ -35,6 +35,8 @@ var model = {
     "selectedBarServiceStats": []
 };
 
+var hostname = "localhost";
+
 $(document).ready(init);
 
 function init () {
@@ -160,7 +162,7 @@ function getBarStats () {
             setError("Invalid input format");
         }
     };
-    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/edit.php`, data, callback, true);
 }
 
 function setError (msg) {
@@ -198,7 +200,7 @@ function logout () {
         }
     };
 
-    // post("http://localhost/beerbuddy/backend/logout.php", {}, callback, true);
+    // post(`http://${hostname}/beerbuddy/backend/logout.php`, {}, callback, true);
     var options = {
         "async": true,
         "method": "GET",
@@ -215,7 +217,7 @@ function logout () {
             logDebug("post()", "ajax request result", `failure -> ${err}`);
         }
     };
-    $.ajax("http://localhost/beerbuddy/backend/logout.php", options);
+    $.ajax(`http://${hostname}/beerbuddy/backend/logout.php`, options);
 }
 
 function getClientInfo () {
@@ -265,7 +267,7 @@ function getClientInfo () {
     };
 
     setError("");
-    post("http://localhost/beerbuddy/backend/readRating.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/readRating.php`, data, callback, true);
 }
 
 function add(drink) 
@@ -288,7 +290,7 @@ function add(drink)
         if (status === "failure") {
         }
     };
-    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/edit.php`, data, callback, true);
 }
 
 function deletes(drink,id) 
@@ -308,7 +310,7 @@ function deletes(drink,id)
             getMyDrinks($(".barName").html(), model.selectedBar);
         }
     };
-    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/edit.php`, data, callback, true);
 }
 
 function setBarName (name) {
@@ -357,7 +359,7 @@ function submitDrinkEdit() {
             setError("Invalid response format");
         }
     };
-    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/edit.php`, data, callback, true);
 }
 
 function setSelectedBar (bar_name, bar_id) {
@@ -522,7 +524,7 @@ function getMyDrinks (name, id) {
             setError("Invalid response format");
         }
     };
-    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/edit.php`, data, callback, true);
 }
 
 function getMyBars(username) {
@@ -555,5 +557,5 @@ function getMyBars(username) {
             setError("Invalid response format");
         }
     };
-    post("http://localhost/beerbuddy/backend/edit.php", data, callback, true);
+    post(`http://${hostname}/beerbuddy/backend/edit.php`, data, callback, true);
 }
